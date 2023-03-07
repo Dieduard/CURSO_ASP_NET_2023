@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CURSO_MVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CURSO_MVCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ESTADO" EntityType="CURSO_MVCModel.ESTADO" />
+    <EntitySet Name="USUARIOS" EntityType="CURSO_MVCModel.USUARIOS" />
+    <AssociationSet Name="FK_USUARIOS_ESTADO" Association="CURSO_MVCModel.FK_USUARIOS_ESTADO">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="USUARIOS" EntitySet="USUARIOS" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ESTADO">
+    <Key>
+      <PropertyRef Name="CodEstado" />
+    </Key>
+    <Property Name="CodEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Estado1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USUARIOS" Relationship="CURSO_MVCModel.FK_USUARIOS_ESTADO" FromRole="ESTADO" ToRole="USUARIOS" />
+  </EntityType>
+  <EntityType Name="USUARIOS">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Passwordd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CodEstado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ESTADO" Relationship="CURSO_MVCModel.FK_USUARIOS_ESTADO" FromRole="USUARIOS" ToRole="ESTADO" />
+  </EntityType>
+  <Association Name="FK_USUARIOS_ESTADO">
+    <End Type="CURSO_MVCModel.ESTADO" Role="ESTADO" Multiplicity="1" />
+    <End Type="CURSO_MVCModel.USUARIOS" Role="USUARIOS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="CodEstado" />
+      </Principal>
+      <Dependent Role="USUARIOS">
+        <PropertyRef Name="CodEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

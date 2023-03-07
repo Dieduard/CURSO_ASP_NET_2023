@@ -1,0 +1,47 @@
+﻿<!-- #region AQUI ESTA LA VISTA DE LA TABLA USUARIOS -->
+
+@model  List<CURSO_MVC.Models.TableViewModels.UsuarioTableViewModels> /* AQUI RECIBIRA UNA LISTA DEL TIPO MODELO*/
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";  /* CON ESTA LINEA HACEMOS REFERECIA A EL NUEVO LAYOUT QUE HEMOS CREADO */
+}
+<br />
+<br />
+<br />
+<h2>Lista de los Usuarios del Sistema:</h2>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" onclick="document.location.href= '@Url.Content("~/Usuario/Add")'" value="Nuevo" />@*BOTON AGREGAR USUARIO*@
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12 ">
+        <table class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Email:</th>
+                <th>Edad</th>
+                <th></th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.Id</td>
+                    <td>@oElemento.Email</td>
+                    <td>@oElemento.Edad</td>
+                    <td>
+                        <input onclick="document.location.href= '@Url.Content("~/Usuario/Edit"+oElemento.Id)'" type="button" value="Editar" class="btn btn-default" />
+                        <input onclick="jsDelete(@oElemento.Id);" type="button" value="Eliminar" class="btn btn-danger" />
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script>
+    function jsDelete(id) {
+
+    }
+</script>
+<!-- #endregion -->

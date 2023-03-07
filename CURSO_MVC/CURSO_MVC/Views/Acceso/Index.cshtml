@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml"; /* FORMA DE ESPECIFICAR EL NUEVO LAYOUT QUE HEMOS CREADO */
+}
+
+@*AQUI SE VIENE FORMANDO EL CUERPO DE LO QUE VIENE SIENDO EL LOGIN*@
+<div class="row">
+    <form id="frm">
+        <br />
+        <br />
+        <br />
+
+        <h3>Tienes que Iniciar Sesion</h3>
+        <div class="col-lg-6 col-lg-offset-3">
+            @*CON EL COL: LE ESTAMOS DANDO LAS DIMENCIONES QUE VA A TENER NUESTRO INPUT*@
+            Usuario:
+            <input type="text" name="user" />
+            Contraseña:
+            <input type="password" name="password" />
+            <br />
+            <input type="submit" class="btn btn-success" value="Entrar" />
+
+        </div>
+    </form>
+</div>
+
+@{
+/* ESTA SERIA UNA FORMA DE USAR RAZOR Y COMO DARLE FUNCIONALIDAD AL FORMULARIO */
+//var NumUno = 1, numDos = 2, suma = 0;
+//suma = NumUno + numDos;
+}
+@*<input type="text" name="password" /> suma*@
+
+@* LA FORMA CORRECTA PARA EJECUTAR LO QUE VIENE SIENDO EL JQUERY CON EL USO DEL SECTION SCRIPT Y SE CARGUE EN NUESTRO CONTROLADOR LA FUNCIONALIDAD  *@
+
+@section scripts
+{
+    @*/* AQUI VENIMOS AGREGANDO LA FUNCIONALIDAD DEL BOTON POR MEDIO DE JAVASCRIPT*@
+    @*QUE VIENE SIENDO UN SELECTOR DE JQUERY*@
+    <script>
+    $(document).ready(function () {
+        $("#frm").submit(function (e) {               /* HE AQUI UN SELECTOR DE JQUERY SELECCIONANDO LO QUE ES EL FORMULARIO */
+            e.preventDefault();                       /* ESTA LINEA ES IMPORTATE PARA QUE HAGA EL SUBMIT CORRECTAMENTE */
+
+            /* LA URL ES UNA CLASE YA CREADA Y CONTENT ES SU METODO */
+
+            url = "@Url.Content("~/Acceso/Enter")"          /* AQUI LE ESTAMOS DANDO UNA RUTA A DONDE LO VAMOS A REDERIGIR QUE SERIA A ACCESO LOGIN*/
+            parametros = $(this).serialize();       /*CON ESTA LINEA ES COMO QUE SELECCIONO TODOS LOS PARAMETROS DE LA VISTA CREADA PARA FUNCIONAMIENTO */
+
+            $.post(url, parametros, function (data) {
+
+                /* VERIFICACION SI EL RESULTADO ES CIERTO*/
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";  /* AQUI LE DAMOS LA RUTA DEL LOGIN POR SI NO CUMPLE CON LAS CREDENCIALES */
+                } else {
+                    alert(data)     /* SINO SE AGREGA NADA AQUI LOS MOSTRAR LO QUE VIENE SIENDO UNA ALERTA */
+                }
+            })
+        })
+    })
+    </script>
+}
+
