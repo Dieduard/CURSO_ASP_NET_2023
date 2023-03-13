@@ -41,11 +41,13 @@
 </div>
 <script>
     function jsDelete(id) {
-        if (confirm("Estas Seguro ?") {
-              url = "@Url.Content("~/Usuario/Delete")" + "/" + id;
+        if (confirm("Estas Seguro ?")) {
+
+            url = "@Url.Content("~/Usuario/Delete")" + "/" + id;
+
             $.post(url, function (data) {
                 if (data == 1) {
-                    document.location.href = "@Url.Content("~/Usuario/")"
+                    document.location.href="@Url.Content("~/Usuario/")"
                 } else {
                         alert("Ocurrio un Error :( ")             
                 }
