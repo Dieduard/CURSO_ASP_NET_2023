@@ -13,6 +13,7 @@ namespace CURSO_MVC
         {
             #region METODO QUE INDICA COMO ENRUTAR LOS CONTROLADORES.
 
+            /* ESTA SERIA LA FORMA DE COMO VAMOS A ENRUTAR TODOS LOS CONTROLADORES = CONTROLADOR - ACCION - ID */
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(

@@ -4,10 +4,9 @@ using System.ComponentModel.DataAnnotations;      /* HAGO USO DE ESTA LIBRERIA P
 
 namespace CURSO_MVC.Models.ViewModel
 {
+    #region ATRIBUTOS DE LA TABLA USUARIO Y QUE LOS PERMITE AGREGAR LOS DATOS DESDE NUESTRO FORMULARIO Y SUS VALIDACIONES  ...
     public class UsuarioViewModel
     {
-        #region ATRIBUTOS QUE LOS SIRVE PARA AGREGAR TODOS LOS DATOS DE NUESTRO USUARIO EN EL FORMULARIO ...
-
         [Required]                                /* ESTO QUIERE DECIR QUE ESTE CAMPO ES REQUERIDO */
         [EmailAddress]                            /* ESTO QUIERE DECIR QUE VALIDA QUE TENGA LA ESTRUCTURA DE UN CORREO */
         [Display(Name = "(Correo Electronico)")]   /* AQUI LE PONEMOS POR NOMBRE CORREO ELETRO....*/
@@ -26,12 +25,13 @@ namespace CURSO_MVC.Models.ViewModel
 
         [Required]                                /* ATRIBUTO REQUERIDO */
         public int Edad { get; set; }
-        #endregion
     }
+    #endregion
 
+    #region ATRIBUTOS DE LA TABLA USUARIO Y QUE LOS PERMITE EDITAR LOS DATOS DESDE NUESTRO TABLA POR MEDIO DE NUESTRO FORMULARIO...
     public class EditUsuarioViewModel
     {
-        #region ATRIBUTOS QUE LOS SIRVE PARA AGREGAR TODOS LOS DATOS DE NUESTRO USUARIO EN EL FORMULARIO ...
+        public int Id { get; set; }
 
         [Required]                                /* ESTO QUIERE DECIR QUE ESTE CAMPO ES REQUERIDO */
         [EmailAddress]                            /* ESTO QUIERE DECIR QUE VALIDA QUE TENGA LA ESTRUCTURA DE UN CORREO */
@@ -50,8 +50,9 @@ namespace CURSO_MVC.Models.ViewModel
 
         [Required]                                /* ATRIBUTO REQUERIDO */
         public int Edad { get; set; }
-        #endregion
     }
+    #endregion
+
 }
 
 

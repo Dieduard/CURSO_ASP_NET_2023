@@ -7,8 +7,9 @@
     @* PROCEDEMOS A TRABAJAR EN EL FORMULARIO *@
     <div class="col-md-12" style="align-content:center">
         @*FORMA DE ABRIR LO QUE VIENE SIENDO NUESTRO FORMULARO.*@
-        @using (Html.BeginForm("Editar", "Usuario", FormMethod.Post, new { role = "form", @class = "" })) //FORMATO PARA ABRIR FORMULARIO
+        @using (Html.BeginForm("Edit", "Usuario", FormMethod.Post, new { role = "form", @class = "" })) //FORMATO PARA ABRIR FORMULARIO
         {
+            @Html.HiddenFor(d => d.Id)
             // EL ATRIBUTO DE ABAJO SE PONE PARA SEGURIDAD QUE IMPIDE QUE HAGAN PETICIONES POR FUERA (CONSULTAS)
             @Html.AntiForgeryToken() // SEGURIDAD
             // EL SIGUIENTE ATRIBUTO ES CUANDO HAY UN PROBLEMA SE MOSTRARA
@@ -30,9 +31,8 @@
             @Html.LabelFor(d => d.Edad)
             @Html.TextBoxFor(d => d.Edad, new { @class = "form-control" })
             @Html.ValidationMessage("Edad", new { @class = "text-danger" }) /* LINEA DE VALIDACION */
-
             <div style="text-align:center">
-                <input type="submit" class="btn btn-success" value="Guardar" />  <!-- BOTON  -->
+                <input type="submit" class="btn btn-success" value="Guardar"/>  <!-- BOTON  -->
             </div>
         }
     </div>

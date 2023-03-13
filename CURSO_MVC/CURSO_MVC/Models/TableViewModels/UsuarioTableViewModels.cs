@@ -8,6 +8,7 @@ namespace CURSO_MVC.Models.TableViewModels
     public class UsuarioTableViewModels
     {
         /* ATRIBUTOS DE LA CLASE USUARIOS SE HACE DE LA SIGUIENTE FORMA */
+        /* AQUI ES DONDE VAMOS A AGREGAR TODOS LOS ATRIBUTOS DE NUESTRA CLASE USUARIO QUE QUERAMOS MOSTRAR EN LA LISTA */
 
         #region TODOS LOS ATRIBUTOS DE LA CLASE USUARIO 
         public int Id { get; set; }

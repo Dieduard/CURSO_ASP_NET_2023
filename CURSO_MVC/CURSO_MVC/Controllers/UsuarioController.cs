@@ -34,7 +34,7 @@ namespace CURSO_MVC.Controllers
         }
         #endregion
 
-        #region TODOS LOS METODOS QUE HACEN REFERENCIA AL FORMULARIO AGREGAR USUARIO (( ADD == AGREGAR ))
+        #region TODO LO QUE TIENE QUE VER CON EL BOTON AGREGAR DEL FORMULARIO (( ADD == AGREGAR ))
 
         [HttpGet] /* GET == FORMA DE CONSULTAR A LA BASE DE DATOS Y OBTENER LA INFORMACION */
         public ActionResult Add()
@@ -53,54 +53,75 @@ namespace CURSO_MVC.Controllers
             /*AHORA SE PROCEDE GUARDARLO A LA BASE DE DATOS */
             using (var db = new BD_USUARIOSEntities())
             {
-                usuarios oUsuario = new usuarios();
+                usuarios oUsuario = new usuarios(); /*CREO UN OBJETO DE LA TABLA USUARIO PARA TENER ACCESO A SUS ATRIBUTOS*/
+                /* EN LA PARTE DE ABAJO MANDO A LLAMAR CADA ATRIBUTO PARA LLENARLO CON LO QUE VAMOS A PONER EN LOS CAMPOS */
                 oUsuario.CodEstado = 1;
                 oUsuario.Email = model.Email;
                 oUsuario.Edad = model.Edad;
                 oUsuario.Passwordd = model.Password;
-
                 db.usuarios.Add(oUsuario);
-                db.SaveChanges();
+                db.SaveChanges();/* AQUI ESTOY GUARDANDO LOS DATOS INGRESADOS */
             }
             return Redirect(Url.Content("~/Usuario/"));
         }
         #endregion
 
-        #region TODOS LOS METODOS QUE HACEN REFERENCIA AL FORMULARIO EDITAR USUARIO (( EDIT ))
+        #region TODO LO QUE TIENE QUE VER CON LA FUNCIONALIDAD >>> EDITAR <<<  (( EDIT ))
         
         public ActionResult Edit(int Id)
         {
             /* AHORITA VAMOS A LLENAR LOS DATOS QUE VAMOS A EDITAR */
             EditUsuarioViewModel model = new EditUsuarioViewModel();
-            using (var db = new BD_USUARIOSEntities())
+            using (var db = new BD_USUARIOSEntities()) /* FORMA DE LLENAR LOS CAMPOS */
             {
-                var oUsuario = db.usuarios.Find(Id);
+                var oUsuario = db.usuarios.Find(Id); /* FORMA DE TRAER UN OBJETO CON ESE ID */
                 model.Edad = (int)oUsuario.Edad;
                 model.Email = oUsuario.Email;
+                model.Id = oUsuario.Id;
             }
             return View(model);
         }
+        [HttpPost] /* SIRVE PARA OBTENER LOS DATOS DE MI BASE DE DATOS */
+        public ActionResult Edit(EditUsuarioViewModel model)
+        {
+            /*FORMA DE VALIDAR EL MODELO SINO ME LO RETORNA */
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            using (var db = new BD_USUARIOSEntities()) /* FORMA DE LLENAR LOS CAMPOS */
+            {
+                var oUsuario = db.usuarios.Find(model.Id); /* FORMA DE TRAER UN OBJETO CON ESE ID */
+                oUsuario.Email = model.Email;
+                oUsuario.Edad = model.Edad;
+                model.Id = oUsuario.Id;
 
-        //[HttpPost] /* SIRVE PARA OBTENER LOS DATOS DE MI BASE DE DATOS */
-        //public ActionResult Edit(EditUsuarioViewModel model)
-        //{
-        //    /*FORMA DE VALIDAR EL MODELO SINO ME LO RETORNA */
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-        //    /* AHORITA VAMOS A LLENAR LOS DATOS QUE VAMOS A EDITAR */
-        //    EditUsuarioViewModel model = new EditUsuarioViewModel();
-        //    using (var db = new BD_UsuarioEntities2())
-        //    {
-        //        var oUsuario = db.usuarios.Find(Id);
-        //        model.Edad = (int)oUsuario.Edad;
-        //        model.Email = oUsuario.Email;
-        //    }
-        //    return Redirect(Url.Content("~/Usuario/"));
-        //}
+                if (model.Password != null && model.Password.Trim() != "" )
+                {
+                    oUsuario.Passwordd = model.Password;                
+                }
+                db.Entry(oUsuario).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();   
+            }
+            return Redirect(Url.Content("~/Usuario/"));
+        }
+        #endregion
 
-     
+        #region TODO LO QUE TIENE QUE VER CON LA FUNCION >>> ELIMINAR <<<
+        [HttpPost] /* SIRVE PARA OBTENER LOS DATOS DE MI BASE DE DATOS */
+        public ActionResult Delete(int Id)
+        {
+            using (var db = new BD_USUARIOSEntities()) /* FORMA DE LLENAR LOS CAMPOS */
+            {
+                var oUsuario = db.usuarios.Find(Id); /* FORMA DE TRAER UN OBJETO CON ESE ID */
+                oUsuario.CodEstado = 3; // FORMA PARA ELIMINAR 
+
+
+                db.Entry(oUsuario).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Content("1"); /* ESTO EN VEZ DE DEVOLVER UNA VISTA RETORNA UN CONTENIDO QUE LO ESPERARA DEL LADO DEL INDEX */
+        }
         #endregion
 
 

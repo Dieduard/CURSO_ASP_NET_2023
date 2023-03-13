@@ -11,7 +11,7 @@
 <h2>Lista de los Usuarios del Sistema:</h2>
 <div class="row">
     <div class="col-md-12">
-        <input type="button" class="btn btn-primary" onclick="document.location.href= '@Url.Content("~/Usuario/Add")'" value="Nuevo" />@*BOTON AGREGAR USUARIO*@
+        <input type="button" class="btn btn-primary" onclick="document.location.href= '@Url.Content("~/Usuario/Add")'" value="Nuevo " />@*BOTON AGREGAR USUARIO*@
     </div>
 </div>
 <br />
@@ -22,7 +22,7 @@
                 <th>#</th>
                 <th>Email:</th>
                 <th>Edad</th>
-                <th></th>
+                <th>Funcionalidad</th>
             </tr>
             @foreach (var oElemento in Model)
             {
@@ -31,7 +31,7 @@
                     <td>@oElemento.Email</td>
                     <td>@oElemento.Edad</td>
                     <td>
-                        <input onclick="document.location.href= '@Url.Content("~/Usuario/Edit"+oElemento.Id)'" type="button" value="Editar" class="btn btn-default" />
+                        <input onclick="document.location.href= '@Url.Content("~/Usuario/Edit/"+oElemento.Id)'" type="button" value="Editar" class="btn btn-default" />
                         <input onclick="jsDelete(@oElemento.Id);" type="button" value="Eliminar" class="btn btn-danger" />
                     </td>
                 </tr>
@@ -41,7 +41,17 @@
 </div>
 <script>
     function jsDelete(id) {
-
+        if (confirm("Estas Seguro ?") {
+              url = "@Url.Content("~/Usuario/Delete")" + "/" + id;
+            $.post(url, function (data) {
+                if (data == 1) {
+                    document.location.href = "@Url.Content("~/Usuario/")"
+                } else {
+                        alert("Ocurrio un Error :( ")             
+                }
+            })
+        }
+       
     }
 </script>
 <!-- #endregion -->

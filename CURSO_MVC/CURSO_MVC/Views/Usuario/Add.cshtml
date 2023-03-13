@@ -2,17 +2,21 @@
 @{
     ViewBag.Title = "Agregar Usuario";
 }
+<br />
+<br />
+<br />
 <h2>@ViewBag.Title</h2> @*ESTA ES UNA FORMA PARA NO REPETIR LO MISMO QUE TIENE EN EL TITULO*@
-<div class="row" style="align-content:center">                 @* PROCEDEMOS A TRABAJAR EN EL FORMULARIO *@ 
+<div class="row" style="align-content:center">
+    @* PROCEDEMOS A TRABAJAR EN EL FORMULARIO *@
     <div class="col-md-12" style="align-content:center">
         @*FORMA DE ABRIR LO QUE VIENE SIENDO NUESTRO FORMULARO.*@
-        @using (Html.BeginForm("Add", "Usuario", FormMethod.Post, new { role = "form", @class = "" })) @*FORMATO PARA ABRIR FORMULARIO*@
+        @using (Html.BeginForm("Add", "Usuario", FormMethod.Post, new { role = "form", @class = "" }))
         {
             //// EL ATRIBUTO DE ABAJO SE PONE PARA SEGURIDAD QUE IMPIDE QUE HAGAN PETICIONES POR FUERA (CONSULTAS) Y NO ESTAR VULNERABLE.
             @Html.AntiForgeryToken() // ESTE ES UN ATRIBUTO DE SEGURIDAD QUE IMPIDE QUE HAGAN CONSULTAS DESDE AFUERA.
 
             // EL SIGUIENTE ATRIBUTO ES CUANDO HAY UN PROBLEMA SE MOSTRARA
-            @Html.ValidationMessage("Error", new { @class = "text-danger" }) // CON ESA CLASE DETERMINAMOS ESO 
+            @Html.ValidationMessage("Error", new { @class = "text-danger" }) // CON ESA CLASE DETERMINAMOS ESO
 
             // Ahora solo procedo a agregar los controles de nuestro formulario
             @Html.LabelFor(d => d.Email) // ESTA ES LA FORMA DE PONER UN LABEL.....
@@ -30,9 +34,10 @@
             @Html.LabelFor(d => d.Edad)
             @Html.TextBoxFor(d => d.Edad, new { @class = "form-control" })
             @Html.ValidationMessage("Edad", new { @class = "text-danger" }) /* LINEA DE VALIDACION */
+            <br />
             <div style="text-align:center">
-                <input type="submit" class="btn btn-success" value="Guardar" />  <!-- BOTON  -->
+                <input type="submit" class="btn btn-success" value="Guardar Usuario " />  <!-- BOTON  -->
             </div>
-       
+        }
     </div>
 </div>  
