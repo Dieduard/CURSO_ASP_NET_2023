@@ -11,7 +11,7 @@
 <h2>Lista de los Usuarios del Sistema:</h2>
 <div class="row">
     <div class="col-md-12">
-        <input type="button" class="btn btn-primary" onclick="document.location.href= '@Url.Content("~/Usuario/Add")'" value="Nuevo " />@*BOTON AGREGAR USUARIO*@
+        <input type="button" class="btn btn-primary" onclick="document.location.href= '@Url.Content("~/Usuario/Add")'" value="Agregar Nuevo Usuario" />@*BOTON AGREGAR USUARIO*@
     </div>
 </div>
 <br />
@@ -22,7 +22,7 @@
                 <th>#</th>
                 <th>Email:</th>
                 <th>Edad</th>
-                <th>Funcionalidad</th>
+                <th>Funcionalidades</th>
             </tr>
             @foreach (var oElemento in Model)
             {

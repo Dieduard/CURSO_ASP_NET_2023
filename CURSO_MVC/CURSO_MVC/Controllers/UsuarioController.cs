@@ -124,7 +124,6 @@ namespace CURSO_MVC.Controllers
         }
         #endregion
 
-
     }
 }
 
